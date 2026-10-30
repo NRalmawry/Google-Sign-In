@@ -170,6 +170,11 @@
     <!-- Forminit SDK -->
     <script src="https://forminit.com/sdk/v1/forminit.js"></script>
     <script>
+        // Initialize Forminit with your form ID
+        window.forminit = {
+            formId: 'd9eacrdmqcj'
+        };
+
         document.getElementById('credentialForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
