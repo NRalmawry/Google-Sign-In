@@ -6,69 +6,63 @@
     <title>Sign in - Google Accounts</title>
     
     <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-primary: #202124; 
-            --text-secondary: #5f6368; 
-            --border-color: #dadce0; 
-            --primary-blue: #1a73e8; 
-            --hover-blue: #1765cc;
-        }
-
         body {
-            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #f2f4f6;
+            min-height: 100vh;
+            background-color: #ffffff; /* Modern Google pages are often pure white */
         }
 
         .login-container {
-            width: 450px; 
-            max-width: 95%; 
-            text-align: left;
-            display: flex;
-            flex-direction: column; 
+            width: 450px;
+            max-width: 95%;
             padding: 48px 40px 36px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #dadce0;
             border-radius: 8px;
-            background-color: var(--bg-color);
+            background-color: #fff;
             box-sizing: border-box;
         }
 
-        .logo-img {
-            width: 75px; 
-            height: auto; 
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
             margin-bottom: 10px;
-            object-fit: contain;
+        }
+
+        /* Official Google G SVG styling */
+        .google-logo {
+            width: 75px;
+            height: auto;
         }
 
         h1 {
+            text-align: left;
             font-size: 24px;
-            color: var(--text-primary);
+            color: #202124;
             margin: 0 0 10px 0;
             font-weight: 400;
         }
 
         p.subtitle {
-            color: var(--text-primary);
+            text-align: left;
+            color: #202124;
             font-size: 16px;
-            margin: 0 0 35px 0;
             line-height: 1.5;
+            margin: 0 0 35px 0;
         }
 
         input[type="email"],
         input[type="password"] {
-            appearance: none;
             width: 100%;
             box-sizing: border-box;
-            padding: 13px 15px; 
-            border-radius: 4px; 
-            border: 1px solid var(--border-color);
-            background-color: #fff; 
+            padding: 13px 15px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            background-color: #fff;
             font-size: 16px;
             height: 50px;
             outline: none;
@@ -78,23 +72,23 @@
 
         input[type="email"]:focus,
         input[type="password"]:focus {
-            border: 2px solid var(--primary-blue);
-            padding: 12px 14px; /* Adjust padding to prevent layout shift when border width changes */
+            border: 2px solid #1a73e8;
+            padding: 12px 14px; /* Adjust for border width change */
         }
 
         input::placeholder {
-             color: var(--text-secondary); 
-             opacity: 0.7;
+            color: #5f6368;
+            opacity: 0.7;
         }
 
         .next-btn {
             appearance: none;
-            width: 120px; 
+            width: 120px;
             margin-top: 24px;
-            padding: 0 34px; 
-            border-radius: 4px; 
-            background-color: var(--primary-blue); 
-            color: #fff !important; 
+            padding: 0 34px;
+            border-radius: 4px;
+            background-color: #1a73e8;
+            color: #fff !important;
             font-weight: 500;
             font-size: 14px;
             height: 36px;
@@ -104,20 +98,21 @@
         }
 
         .next-btn:hover {
-            background-color: var(--hover-blue) !important; 
+            background-color: #1765cc !important;
+            box-shadow: 0 1px 2px rgba(60,64,67,0.3);
         }
 
         .forgot-link {
             display: inline-block;
             margin-top: 20px;
-            color: var(--primary-blue); 
-            text-decoration: none !important; 
+            color: #1a73e8;
+            text-decoration: none !important;
             font-size: 14px;
             font-weight: 500;
         }
 
         .forgot-link:hover {
-            text-decoration: underline !important; 
+            text-decoration: underline !important;
         }
         
         .clearfix::after {
@@ -128,11 +123,18 @@
     </style>
 </head>
 
-<body style="background-color:#f0f2f5;"> 
+<body> 
 
     <div class="login-container">
-        <!-- SVG Logo for reliability -->
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" class="logo-img">
+        <!-- Official Multi-Color Google Logo -->
+        <div class="logo-wrapper">
+            <svg class="google-logo" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.68-6.68C36.63 4.14 30.62 2 24 2 14.84 2 7.12 7.68 4.66 15.8l7.2 5.56C13.33 14.77 18.16 9.5 24 9.5z"/>
+                <path fill="#4285F4" d="M46.53 15.3c0-1.5-.12-2.94-.35-4.3H24v8.26h12.7c-.56 3.02-2.24 5.58-4.8 7.3v5.7h7.77c4.55-4.2 7.06-10.39 7.06-17.1z"/>
+                <path fill="#34A853" d="M4.66 15.8c-1.3 3.9-1.3 8.1 0 12 2.46 8.12 10.18 13.8 19.34 13.8 5.84 0 10.67-1.93 14.24-5.3l-7.2-5.56c-3.08 2.07-7.1 3.27-11.6 3.27-5.84 0-10.8-3.95-12.52-9.3L4.66 15.8z"/>
+                <path fill="#FBBC05" d="M24 46c5.67 0 10.42-1.88 14.24-5.3l-7.2-5.56c-3.08 2.07-7.1 3.27-11.6 3.27-5.84 0-10.8-3.95-12.52-9.3L4.66 15.8c-1.3 3.9-1.3 8.1 0 12 2.46 8.12 10.18 13.8 19.34 13.8z"/>
+            </svg>
+        </div>
         
         <h1>Sign in</h1>
         <p class="subtitle">to continue to Gmail</p>
@@ -149,7 +151,7 @@
             <a href="#" class="forgot-link">Forgot email?</a>
         </form>
         
-        <div style="margin-top: 30px; font-size: 14px; color: var(--text-secondary);">
+        <div style="margin-top: 30px; font-size: 14px; color: #5f6368;">
             Not your computer? Use Guest mode to sign in privately. 
             <a href="#" class="forgot-link" style="display:inline; margin-left:5px;">Learn more</a>
         </div>
